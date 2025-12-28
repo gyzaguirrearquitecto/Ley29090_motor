@@ -1,0 +1,2244 @@
+{
+  "metadata": {
+    "id": "reglas_29090",
+    "version": "0.3.0",
+    "title": "Motor de decisión — TUO Ley 29090 (Habilitación Urbana y Edificación)",
+    "last_updated": "2025-12-28",
+    "normative_sources": [
+      {
+        "name": "TUO Ley 29090 (DS 006-2017-VIVIENDA y modificatorias)",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      }
+    ]
+  },
+  "schema": {
+    "scopes": [
+      "edificacion",
+      "habilitacion_urbana"
+    ],
+    "fields": {
+      "scope": {
+        "type": "enum",
+        "required": true,
+        "enum": [
+          "edificacion",
+          "habilitacion_urbana"
+        ]
+      },
+      "es_patrimonio_cultural": {
+        "type": "bool",
+        "required": true
+      },
+      "regimen_propiedad_exclusiva_y_comun": {
+        "type": "bool",
+        "required": true
+      },
+      "tipo_intervencion": {
+        "type": "enum",
+        "required": false,
+        "enum": [
+          "obra_nueva",
+          "ampliacion",
+          "remodelacion",
+          "demolicion_total",
+          "demolicion_parcial",
+          "cerco",
+          "instalacion_temporal",
+          "obra_menor",
+          "cambio_uso",
+          "modificacion_proyecto"
+        ]
+      },
+      "uso_principal": {
+        "type": "enum",
+        "required": false,
+        "enum": [
+          "vivienda_unifamiliar",
+          "vivienda_multifamiliar",
+          "condominio",
+          "oficina",
+          "comercio",
+          "cultural_diversion_espectaculo",
+          "mercado",
+          "deportivo_espectaculo",
+          "industria",
+          "educativo",
+          "salud",
+          "hospedaje",
+          "combustible",
+          "terminal_transporte",
+          "uso_mixto_con_vivienda",
+          "otros"
+        ]
+      },
+      "pisos": {
+        "type": "number",
+        "required": false,
+        "min": 0
+      },
+      "area_techada_m2": {
+        "type": "number",
+        "required": false,
+        "min": 0
+      },
+      "area_total_resultante_m2": {
+        "type": "number",
+        "required": false,
+        "min": 0
+      },
+      "incluye_sotano_o_semisotano": {
+        "type": "bool",
+        "required": false
+      },
+      "profundidad_excavacion_m": {
+        "type": "number",
+        "required": false,
+        "min": 0
+      },
+      "colinda_con_edificacion_existente": {
+        "type": "bool",
+        "required": false
+      },
+      "usa_explosivos": {
+        "type": "bool",
+        "required": false
+      },
+      "aumento_area_techada": {
+        "type": "bool",
+        "required": false
+      },
+      "modificacion_estructural": {
+        "type": "bool",
+        "required": false
+      },
+      "cambio_uso": {
+        "type": "bool",
+        "required": false
+      },
+      "longitud_cerco_m": {
+        "type": "number",
+        "required": false,
+        "min": 0
+      },
+      "ocupantes": {
+        "type": "number",
+        "required": false,
+        "min": 0
+      },
+      "area_predial_ha": {
+        "type": "number",
+        "required": false,
+        "min": 0
+      },
+      "uso_predial": {
+        "type": "enum",
+        "required": false,
+        "enum": [
+          "residencial",
+          "industria_comercio_ou",
+          "mixto",
+          "otros"
+        ]
+      },
+      "es_isla_rustica": {
+        "type": "bool",
+        "required": false
+      },
+      "conforma_lote_unico": {
+        "type": "bool",
+        "required": false
+      },
+      "afecto_plan_vial_provincial_metropolitano": {
+        "type": "bool",
+        "required": false
+      },
+      "por_etapas_proyecto_integral": {
+        "type": "bool",
+        "required": false
+      },
+      "construccion_simultanea": {
+        "type": "bool",
+        "required": false
+      },
+      "solicita_venta_garantizada_lotes": {
+        "type": "bool",
+        "required": false
+      },
+      "vende_viviendas_edificadas": {
+        "type": "bool",
+        "required": false
+      },
+      "requiere_planeamiento_integral": {
+        "type": "bool",
+        "required": false
+      },
+      "colinda_con_zona_arqueologica_patrimonio_anp": {
+        "type": "bool",
+        "required": false
+      },
+      "es_area_natural_protegida_o_zona_amortiguamiento_o_ecosistema_fragil": {
+        "type": "bool",
+        "required": false
+      },
+      "es_programa_bfh_reubicacion": {
+        "type": "bool",
+        "required": false
+      },
+      "es_proyecto_inversion_publica_app_concesion_servicios_publicos": {
+        "type": "bool",
+        "required": false
+      }
+    }
+  },
+  "rules": [
+    {
+      "id": "EXC-EDIF-09A",
+      "scope": "edificacion",
+      "priority": 1000,
+      "name": "Excepción: acondicionamiento/refacción (sin estructura/uso/área)",
+      "fuente": {
+        "norma": "TUO Ley 29090",
+        "articulo": "9",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "remodelacion"
+          },
+          {
+            "field": "modificacion_estructural",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "aumento_area_techada",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "cambio_uso",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "exento",
+        "label": "Exento de licencia (Art. 9.a)",
+        "acciones": [
+          "Declarar los trabajos en el autovalúo del año siguiente a su ejecución."
+        ],
+        "alertas": [
+          "Si el inmueble es Patrimonio Cultural de la Nación, esta excepción NO aplica."
+        ]
+      }
+    },
+    {
+      "id": "EXC-EDIF-09B",
+      "scope": "edificacion",
+      "priority": 999,
+      "name": "Excepción: cerco frontal hasta 20 m (no PEX/PC)",
+      "fuente": {
+        "norma": "TUO Ley 29090",
+        "articulo": "9",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "cerco"
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "regimen_propiedad_exclusiva_y_comun",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "longitud_cerco_m",
+            "op": "lte",
+            "value": 20
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "exento",
+        "label": "Exento de licencia (Art. 9.b)",
+        "acciones": [
+          "Ejecutar cerco frontal hasta 20 m sin licencia."
+        ],
+        "alertas": [
+          "Si está bajo régimen PEX/PC, NO aplica.",
+          "Si supera 20 m, corresponde trámite por modalidad."
+        ]
+      }
+    },
+    {
+      "id": "EXC-EDIF-09C",
+      "scope": "edificacion",
+      "priority": 998,
+      "name": "Excepción: instalación temporal (caseta/depto. modelo)",
+      "fuente": {
+        "norma": "TUO Ley 29090",
+        "articulo": "9",
+        "literal": "c",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "instalacion_temporal"
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "exento",
+        "label": "Exento de licencia (Art. 9.c)",
+        "acciones": [
+          "Desmontar antes de la conformidad de obra del proyecto principal."
+        ],
+        "alertas": [
+          "Si el inmueble es Patrimonio Cultural de la Nación, esta excepción NO aplica."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-A-58-1-A",
+      "scope": "edificacion",
+      "priority": 900,
+      "name": "A: vivienda unifamiliar <=120 m² (única edificación)",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.1",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "obra_nueva"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "vivienda_unifamiliar"
+          },
+          {
+            "field": "area_techada_m2",
+            "op": "lte",
+            "value": 120
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "incluye_sotano_o_semisotano",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "A",
+        "procedimiento": "Aprobación automática con firma de profesionales",
+        "ruta": [
+          "Municipalidad (cargo de ingreso constituye licencia)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Planos básicos + Memoria",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si requiere sótano/semisótano o excavación >1.50 m colindante con edificación existente, no aplica A; pasa a B.",
+          "Si el predio es Patrimonio Cultural, pasa a C."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-A-58-1-B",
+      "scope": "edificacion",
+      "priority": 899,
+      "name": "A: ampliación vivienda unifamiliar total <=200 m²",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.1",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "ampliacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "vivienda_unifamiliar"
+          },
+          {
+            "field": "area_total_resultante_m2",
+            "op": "lte",
+            "value": 200
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "A",
+        "procedimiento": "Aprobación automática con firma de profesionales",
+        "ruta": [
+          "Municipalidad (cargo de ingreso constituye licencia)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Acreditar licencia/declaratoria previa",
+          "Planos + Memoria",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si supera 200 m², evaluar B/C según pisos/área/uso."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-A-58-1-C",
+      "scope": "edificacion",
+      "priority": 898,
+      "name": "A: remodelación vivienda unifamiliar sin estructura/uso/área",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.1",
+        "literal": "c",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "remodelacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "vivienda_unifamiliar"
+          },
+          {
+            "field": "modificacion_estructural",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "cambio_uso",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "aumento_area_techada",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "A",
+        "procedimiento": "Aprobación automática con firma de profesionales",
+        "ruta": [
+          "Municipalidad (cargo de ingreso constituye licencia)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Planos + Memoria",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si hay modificación estructural/cambio de uso/aumento de área, pasa a B (vivienda)."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-A-58-1-D",
+      "scope": "edificacion",
+      "priority": 897,
+      "name": "A: cerco >20 m (no PEX/PC)",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.1",
+        "literal": "d",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "cerco"
+          },
+          {
+            "field": "regimen_propiedad_exclusiva_y_comun",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "longitud_cerco_m",
+            "op": "gt",
+            "value": 20
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "A",
+        "procedimiento": "Aprobación automática con firma de profesionales",
+        "ruta": [
+          "Municipalidad (cargo de ingreso constituye licencia)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Plano/detalle de cerco",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si está bajo régimen PEX/PC, corresponde B."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-A-58-1-E",
+      "scope": "edificacion",
+      "priority": 896,
+      "name": "A: demolición total <=3 pisos, sin sótano/semisótano, sin explosivos",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.1",
+        "literal": "e",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "demolicion_total"
+          },
+          {
+            "field": "pisos",
+            "op": "lte",
+            "value": 3
+          },
+          {
+            "field": "incluye_sotano_o_semisotano",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "usa_explosivos",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "A",
+        "procedimiento": "Aprobación automática con firma de profesionales",
+        "ruta": [
+          "Municipalidad (cargo de ingreso constituye licencia)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Proceso de demolición",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si tiene sótano/semisótano o supera 3 pisos: pasa a B/C.",
+          "Si requiere explosivos: pasa a C."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-A-58-1-F",
+      "scope": "edificacion",
+      "priority": 895,
+      "name": "A: obras menores (RNE G.040)",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.1",
+        "literal": "f",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "obra_menor"
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "A",
+        "procedimiento": "Aprobación automática con firma de profesionales",
+        "ruta": [
+          "Municipalidad (cargo de ingreso constituye licencia)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Sustento obra menor",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Validar calificación como 'obra menor' según RNE."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-B-58-2-A",
+      "scope": "edificacion",
+      "priority": 800,
+      "name": "B: vivienda uni/multi/condominio <=5 pisos y <=3,000 m²",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.2.1",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "in",
+            "value": [
+              "vivienda_unifamiliar",
+              "vivienda_multifamiliar",
+              "condominio"
+            ]
+          },
+          {
+            "field": "pisos",
+            "op": "lte",
+            "value": 5
+          },
+          {
+            "field": "area_techada_m2",
+            "op": "lte",
+            "value": 3000
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "B",
+        "procedimiento": "Evaluación por Municipalidad o Revisores Urbanos",
+        "ruta": [
+          "Municipalidad (evaluación)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Documentación técnica (3 juegos)",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si supera 5 pisos o 3,000 m²: pasa a C.",
+          "Si es Patrimonio Cultural: pasa a C."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-B-58-2-B",
+      "scope": "edificacion",
+      "priority": 799,
+      "name": "B: cercos en régimen PEX/PC",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.2.1",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "cerco"
+          },
+          {
+            "field": "regimen_propiedad_exclusiva_y_comun",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "B",
+        "procedimiento": "Evaluación por Municipalidad o Revisores Urbanos",
+        "ruta": [
+          "Municipalidad (evaluación)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Plano/detalle de cerco",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si es cerco frontal <=20 m y NO está en régimen, podría ser exento (Art. 9.b)."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-B-58-2-C",
+      "scope": "edificacion",
+      "priority": 798,
+      "name": "B: ampliación/remodelación vivienda con mod. estructural, aumento de área o cambio de uso",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.2.1",
+        "literal": "c",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "in",
+            "value": [
+              "vivienda_unifamiliar",
+              "vivienda_multifamiliar",
+              "condominio"
+            ]
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "in",
+            "value": [
+              "ampliacion",
+              "remodelacion",
+              "cambio_uso"
+            ]
+          },
+          {
+            "any": [
+              {
+                "field": "modificacion_estructural",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "field": "aumento_area_techada",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "field": "cambio_uso",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "B",
+        "procedimiento": "Evaluación por Municipalidad o Revisores Urbanos",
+        "ruta": [
+          "Municipalidad (evaluación)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Sustento edificación existente",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si es oficina/comercio u otro uso distinto a vivienda: revisar C/D."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-B-58-2-D",
+      "scope": "edificacion",
+      "priority": 797,
+      "name": "B: demolición total <=5 pisos y/o con sótano/semisótano (sin explosivos) + parcial",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.2.1",
+        "literal": "d",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "in",
+            "value": [
+              "demolicion_total",
+              "demolicion_parcial"
+            ]
+          },
+          {
+            "field": "usa_explosivos",
+            "op": "eq",
+            "value": false
+          },
+          {
+            "any": [
+              {
+                "field": "pisos",
+                "op": "lte",
+                "value": 5
+              },
+              {
+                "field": "incluye_sotano_o_semisotano",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "B",
+        "procedimiento": "Evaluación por Municipalidad o Revisores Urbanos",
+        "ruta": [
+          "Municipalidad (evaluación)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Memoria demolición (Ing. Civil)",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Si supera 5 pisos o usa explosivos: pasa a C."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-B-58-2-EXCAV",
+      "scope": "edificacion",
+      "priority": 796,
+      "name": "Override: sótano/semisótano o excavación >1.50 m colindante => B",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.1",
+        "literal": "ii (no consideradas en A)",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "any": [
+              {
+                "field": "incluye_sotano_o_semisotano",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "all": [
+                  {
+                    "field": "profundidad_excavacion_m",
+                    "op": "gt",
+                    "value": 1.5
+                  },
+                  {
+                    "field": "colinda_con_edificacion_existente",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "B",
+        "procedimiento": "Evaluación por Municipalidad o Revisores Urbanos",
+        "ruta": [
+          "Municipalidad (evaluación)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Sustento excavación/suelos",
+          "Pago derecho de trámite"
+        ],
+        "alertas": [
+          "Evita clasificar como A en presencia de excavación/sótano."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-C-58-3-A",
+      "scope": "edificacion",
+      "priority": 700,
+      "name": "C: vivienda multi/condominio con >5 pisos o >3,000 m²",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "in",
+            "value": [
+              "vivienda_multifamiliar",
+              "condominio"
+            ]
+          },
+          {
+            "any": [
+              {
+                "field": "pisos",
+                "op": "gt",
+                "value": 5
+              },
+              {
+                "field": "area_techada_m2",
+                "op": "gt",
+                "value": 3000
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Si el uso es de Modalidad D (industria, educativo, salud, etc.), corresponde D."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-C-58-3-B",
+      "scope": "edificacion",
+      "priority": 699,
+      "name": "C: fines diferentes de vivienda (p.ej., oficinas) salvo supuestos D",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "in",
+            "value": [
+              "oficina",
+              "otros"
+            ]
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Ampliación de oficinas se encuadra aquí, salvo que sea un uso de Modalidad D."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-C-58-3-C",
+      "scope": "edificacion",
+      "priority": 698,
+      "name": "C: uso mixto con vivienda",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "c",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "uso_mixto_con_vivienda"
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "EDIF-C-58-3-D",
+      "scope": "edificacion",
+      "priority": 697,
+      "name": "C: predios Patrimonio Cultural de la Nación",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "d",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "es_patrimonio_cultural",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Coordinación con Cultura (según corresponda)",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Excepciones Art. 9 no aplican en Patrimonio Cultural."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-C-58-3-E",
+      "scope": "edificacion",
+      "priority": 696,
+      "name": "C: comercio/cultural/diversión/espectáculos <=30,000 m²",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "e",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "in",
+            "value": [
+              "comercio",
+              "cultural_diversion_espectaculo"
+            ]
+          },
+          {
+            "field": "area_techada_m2",
+            "op": "lte",
+            "value": 30000
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Si supera 30,000 m², corresponde D."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-C-58-3-F",
+      "scope": "edificacion",
+      "priority": 695,
+      "name": "C: mercados <=15,000 m²",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "f",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "mercado"
+          },
+          {
+            "field": "area_techada_m2",
+            "op": "lte",
+            "value": 15000
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Si supera 15,000 m², corresponde D."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-C-58-3-G",
+      "scope": "edificacion",
+      "priority": 694,
+      "name": "C: espectáculos deportivos <=20,000 ocupantes",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "g",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "deportivo_espectaculo"
+          },
+          {
+            "field": "ocupantes",
+            "op": "lte",
+            "value": 20000
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Si supera 20,000 ocupantes, corresponde D."
+        ]
+      }
+    },
+    {
+      "id": "EDIF-C-58-3-H",
+      "scope": "edificacion",
+      "priority": 693,
+      "name": "C: demolición total >5 pisos o con explosivos",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "h",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "demolicion_total"
+          },
+          {
+            "any": [
+              {
+                "field": "pisos",
+                "op": "gt",
+                "value": 5
+              },
+              {
+                "field": "usa_explosivos",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Memoria demolición (Ing. Civil)",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "EDIF-D-58-4-A",
+      "scope": "edificacion",
+      "priority": 650,
+      "name": "D: industria",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.4",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "industria"
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "D",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "EDIF-D-58-4-B",
+      "scope": "edificacion",
+      "priority": 649,
+      "name": "D: comercio/cultural/diversión/espectáculos >30,000 m²",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.4",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "in",
+            "value": [
+              "comercio",
+              "cultural_diversion_espectaculo"
+            ]
+          },
+          {
+            "field": "area_techada_m2",
+            "op": "gt",
+            "value": 30000
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "D",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "EDIF-D-58-4-C",
+      "scope": "edificacion",
+      "priority": 648,
+      "name": "D: mercados >15,000 m²",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.4",
+        "literal": "c",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "mercado"
+          },
+          {
+            "field": "area_techada_m2",
+            "op": "gt",
+            "value": 15000
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "D",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "EDIF-D-58-4-D",
+      "scope": "edificacion",
+      "priority": 647,
+      "name": "D: espectáculos deportivos >20,000 ocupantes",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.4",
+        "literal": "d",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "eq",
+            "value": "deportivo_espectaculo"
+          },
+          {
+            "field": "ocupantes",
+            "op": "gt",
+            "value": 20000
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "D",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "EDIF-D-58-4-E",
+      "scope": "edificacion",
+      "priority": 646,
+      "name": "D: educativo/salud/hospedaje/combustible/terminal transporte",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.4",
+        "literal": "e",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          },
+          {
+            "field": "uso_principal",
+            "op": "in",
+            "value": [
+              "educativo",
+              "salud",
+              "hospedaje",
+              "combustible",
+              "terminal_transporte"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "D",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "HU-A-19-1-1-A",
+      "scope": "habilitacion_urbana",
+      "priority": 900,
+      "name": "HU A: inversión pública/APP/concesión servicios públicos esenciales",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.1.1",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "es_proyecto_inversion_publica_app_concesion_servicios_publicos",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "A",
+        "procedimiento": "Aprobación automática con firma de profesionales",
+        "ruta": [
+          "Municipalidad (cargo de ingreso constituye licencia)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Planos + Memoria",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Si el terreno es Patrimonio Cultural, no aplica."
+        ]
+      }
+    },
+    {
+      "id": "HU-A-19-1-1-B",
+      "scope": "habilitacion_urbana",
+      "priority": 899,
+      "name": "HU A: Programa BFH reubicación",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.1.1",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "es_programa_bfh_reubicacion",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "A",
+        "procedimiento": "Aprobación automática con firma de profesionales",
+        "ruta": [
+          "Municipalidad (cargo de ingreso constituye licencia)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Planos + Memoria",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Si el terreno es Patrimonio Cultural, no aplica."
+        ]
+      }
+    },
+    {
+      "id": "HU-B-19-2-1-A",
+      "scope": "habilitacion_urbana",
+      "priority": 850,
+      "name": "HU B: residencial <=5 ha, isla rústica, lote único, no Plan Vial Prov/Met",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.2.1",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "uso_predial",
+            "op": "eq",
+            "value": "residencial"
+          },
+          {
+            "field": "area_predial_ha",
+            "op": "lte",
+            "value": 5
+          },
+          {
+            "field": "es_isla_rustica",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "field": "conforma_lote_unico",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "field": "afecto_plan_vial_provincial_metropolitano",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "B",
+        "procedimiento": "Evaluación por Municipalidad o Revisores Urbanos",
+        "ruta": [
+          "Municipalidad (evaluación)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Planos + Memoria",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Si el terreno es Patrimonio Cultural, no aplica."
+        ]
+      }
+    },
+    {
+      "id": "HU-B-19-2-1-B",
+      "scope": "habilitacion_urbana",
+      "priority": 849,
+      "name": "HU B: modificación de proyecto de HU (proyecto integral aprobado o plazo vencido)",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.2.1",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "tipo_intervencion",
+            "op": "eq",
+            "value": "modificacion_proyecto"
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "B",
+        "procedimiento": "Evaluación por Municipalidad o Revisores Urbanos",
+        "ruta": [
+          "Municipalidad (evaluación)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Sustento modificación",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "HU-C-19-3-A",
+      "scope": "habilitacion_urbana",
+      "priority": 800,
+      "name": "HU C: por etapas con proyecto integral",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.3",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "por_etapas_proyecto_integral",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Proyecto integral",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "HU-C-19-3-B",
+      "scope": "habilitacion_urbana",
+      "priority": 799,
+      "name": "HU C: construcción simultánea + venta garantizada de lotes",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.3",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "construccion_simultanea",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "field": "solicita_venta_garantizada_lotes",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Sustento venta garantizada",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "HU-C-19-3-C",
+      "scope": "habilitacion_urbana",
+      "priority": 798,
+      "name": "HU C: construcción simultánea + venta de viviendas edificadas",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.3",
+        "literal": "c",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "construccion_simultanea",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "field": "vende_viviendas_edificadas",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Proyecto de viviendas definido",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "HU-C-19-3-D",
+      "scope": "habilitacion_urbana",
+      "priority": 797,
+      "name": "HU C: Patrimonio/ANP/ecosistemas frágiles (u otros no A/B/D)",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.3",
+        "literal": "d",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "any": [
+              {
+                "field": "es_patrimonio_cultural",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "field": "es_area_natural_protegida_o_zona_amortiguamiento_o_ecosistema_fragil",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Compatibilizaciones",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "HU-D-19-4-A",
+      "scope": "habilitacion_urbana",
+      "priority": 780,
+      "name": "HU D: requiere planeamiento integral",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.4",
+        "literal": "a",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "requiere_planeamiento_integral",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "D",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Planeamiento integral",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "HU-D-19-4-B",
+      "scope": "habilitacion_urbana",
+      "priority": 779,
+      "name": "HU D: colinda con zona arqueológica/Patrimonio/ANP",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.4",
+        "literal": "b",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "colinda_con_zona_arqueologica_patrimonio_anp",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "D",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Compatibilizaciones",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "HU-D-19-4-C",
+      "scope": "habilitacion_urbana",
+      "priority": 778,
+      "name": "HU D: industria/comercio/usos especiales (OU)",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.4",
+        "literal": "c",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          },
+          {
+            "field": "uso_predial",
+            "op": "eq",
+            "value": "industria_comercio_ou"
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "D",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": []
+      }
+    },
+    {
+      "id": "EDIF-FALLBACK",
+      "scope": "edificacion",
+      "priority": 1,
+      "name": "Fallback Edificación => C (conservador)",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "58.3",
+        "literal": "i",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "edificacion"
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUE",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Resultado conservador: valida manualmente si la casuística es atípica."
+        ]
+      }
+    },
+    {
+      "id": "HU-FALLBACK",
+      "scope": "habilitacion_urbana",
+      "priority": 1,
+      "name": "Fallback HU => C (conservador)",
+      "fuente": {
+        "norma": "RLHU-RLE (TUO 29090)",
+        "articulo": "19.3",
+        "literal": "d",
+        "url": "https://img.lpderecho.pe/wp-content/uploads/2020/07/tuo-ley-29090-ley-de-regulacion-de-habilitaciones-urbanas-y-edificaciones-006-2017-vivienda-LP.pdf"
+      },
+      "when": {
+        "all": [
+          {
+            "field": "scope",
+            "op": "eq",
+            "value": "habilitacion_urbana"
+          }
+        ]
+      },
+      "then": {
+        "outcome_type": "modalidad",
+        "modalidad": "C",
+        "procedimiento": "Evaluación previa por Comisión Técnica o Revisores Urbanos",
+        "ruta": [
+          "Comisión Técnica (evaluación previa)",
+          "Revisores Urbanos (si aplica)"
+        ],
+        "checklist_refs": [
+          "FUHU",
+          "Expediente completo",
+          "Pago revisión",
+          "Pago trámite"
+        ],
+        "alertas": [
+          "Resultado conservador: valida manualmente si la casuística es atípica."
+        ]
+      }
+    }
+  ]
+}
